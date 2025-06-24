@@ -2,17 +2,17 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='email_domain_validator',         # ชื่อไลบรารีตอน pip install
-    version='0.1.0',                       # เวอร์ชัน
-    author='Your Name',                    # ชื่อของคุณ
-    author_email='your.email@example.com', # อีเมลของคุณ
+    name='email_validator',
+    version='0.1.0',
+    author='Sahassawadee Butman',
+    author_email='sahassawadee.butman@gmail.com',
     description='A simple library to validate email domains using DNS records.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/your-username/email_domain_validator_project', # URL ของ GitHub repo
-    packages=find_packages(),              # หา package ทั้งหมดในโปรเจกต์ (จะเจอ 'email_domain_validator')
+    url='https://github.com/sahassawadee07/proj_email_domain_validator',
+    packages=find_packages(),
     install_requires=[
-        'dnspython',                       # ระบุ dependency ที่ต้องใช้! สำคัญมาก
+        'dnspython',
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
