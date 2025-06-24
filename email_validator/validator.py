@@ -1,0 +1,33 @@
+# email_domain_validator/validator.py
+import dns.resolver
+import re
+
+def validate_email_domain(email):
+    """
+    ตรวจสอบความถูกต้องของโดเมนในอีเมล โดยเช็ค DNS Records (MX และ A)
+    """
+    if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
+        return (False, "Invalid email syntax")
+
+    try:
+        domain = email.split('@')[1]
+    except IndexError:
+        return (False, "Cannot extract domain")
+
+    try:
+        # 1. Check for MX records
+        dns.resolver.resolve(domain, 'MX')
+        return (True, f"Domain '{domain}' is valid and has MX records.")
+    except dns.resolver.NoAnswer:
+        # 2. If no MX, fall back to checking for A records
+        try:
+            dns.resolver.resolve(domain, 'A')
+            return (True, f"Domain '{domain}' is valid (has A record, but no MX record).")
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+            return (False, f"Domain '{domain}' has no MX or A records.")
+    except dns.resolver.NXDOMAIN:
+        return (False, f"Domain '{domain}' does not exist (NXDOMAIN).")
+    except dns.exception.Timeout:
+        return (False, f"DNS query for '{domain}' timed out.")
+    except Exception as e:
+        return (False, f"An error occurred: {e}")
