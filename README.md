@@ -9,6 +9,7 @@ Install directly from GitHub:
 pip install git+https://github.com/your-username/email_domain_validator_project.git
 ```
 # Usage
+```
 from email_domain_validator import validate_email_domain
 
 is_valid, message = validate_email_domain("contact@google.com")
@@ -20,3 +21,4 @@ is_valid, message = validate_email_domain("test@nonexistent-domain123.com")
 print(is_valid, message)
 
 # Output: False, Domain 'nonexistent-domain123.com' does not exist (NXDOMAIN).
+```
