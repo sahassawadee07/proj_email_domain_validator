@@ -2,6 +2,12 @@ import dns.resolver
 import re
 
 def validate_email_domain(email):
+    if not email:
+        return (False, "Email is None or empty")
+    
+    if not isinstance(email, str):
+        return (False, f"Invalid type: expected str, got {type(email)}")
+
     if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
         return (False, "Invalid email syntax")
 
